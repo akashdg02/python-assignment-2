@@ -1,7 +1,7 @@
 ===========================================================
 CAMPUSPE PYTHON BASICS ASSIGNMENT - SUBMISSION
 ===========================================================
-NAME: [Your Full Name]
+NAME: AKASH DG
 TOTAL QUESTIONS ATTEMPTED: 20/20 
 PASSING MARK: 60/100 [cite: 5]
 

@@ -168,18 +168,101 @@ def q18_functions():
     print(f"Result (Add 10+5): {add(10, 5)}")
 
 def q19_text_analysis():
-    """Q19: Word frequency and vowel analysis."""
-    txt = input("Text: ").lower()
-    words = txt.split()
-    freq = {w: words.count(w) for w in set(words)}
-    print(f"Word Frequency: {freq}")
+    """
+    Q19: Comprehensive Text Analysis.
+    Performs word counts, character checks, and frequency mapping.
+    """
+    text = input("Enter a sentence or paragraph: ")
+    
+    # 1. Basic Counts
+    words = text.split()
+    num_words = len(words)
+    
+    # 2. Vowel and Consonant Analysis
+    vowels_set = "aeiouAEIOU"
+    num_vowels = sum(1 for char in text if char in vowels_set)
+    num_consonants = sum(1 for char in text if char.isalpha() and char not in vowels_set)
+    
+    # 3. Transformations
+    reversed_text = text[::-1]
+    # Check palindrome (ignore spaces and case)
+    clean_text = "".join(text.split()).lower()
+    is_palindrome = clean_text == clean_text[::-1]
+    
+    # 4. Content Manipulation
+    no_vowels = "".join([c for c in text if c not in vowels_set])
+    
+    # 5. Frequency and Length
+    # Use a dictionary to count unique word occurrences [cite: 200]
+    word_freq = {}
+    for word in words:
+        clean_word = word.lower().strip(".,!?;:")
+        word_freq[clean_word] = word_freq.get(clean_word, 0) + 1
+        
+    longest = max(words, key=len) if words else "None"
+
+    # Display Results [cite: 200, 201]
+    print("\n" + "="*25)
+    print("   TEXT ANALYSIS RESULT")
+    print("="*25)
+    print(f"Total Words      : {num_words}")
+    print(f"Vowels Count     : {num_vowels}")
+    print(f"Consonants Count : {num_consonants}")
+    print(f"Reversed Text    : {reversed_text}")
+    print(f"Is Palindrome    : {'Yes' if is_palindrome else 'No'}")
+    print(f"Text No Vowels   : {no_vowels}")
+    print(f"Longest Word     : {longest} ({len(longest)} letters)")
+    print(f"Word Frequency   : {word_freq}")
 
 def q20_math_menu():
-    """Q20: Advanced math features (Armstrong & GCD)."""
-    n = get_int("N: ")
-    p = len(str(n))
-    is_arm = sum(int(d)**p for d in str(n)) == n
-    print(f"Armstrong: {is_arm}")
+    """
+    Q20: Comprehensive Mathematical Number System.
+    Includes advanced algorithms for number properties.
+    """
+    import math
+
+    def get_fibonacci(n):
+        """Returns the nth Fibonacci number."""
+        a, b = 0, 1
+        for _ in range(n):
+            a, b = b, a + b
+        return a
+
+    def is_armstrong(n):
+        """Checks if sum of digits raised to power of count equals n."""
+        digits = [int(d) for d in str(n)]
+        power = len(digits)
+        return sum(d**power for d in digits) == n
+
+    def get_gcd(a, b):
+        """Euclidean Algorithm to find Greatest Common Divisor."""
+        while b:
+            a, b = b, a % b
+        return a
+
+    def is_perfect(n):
+        """Checks if sum of proper divisors equals the number."""
+        if n < 1: return False
+        divisors = [i for i in range(1, n) if n % i == 0]
+        return sum(divisors) == n
+
+    # --- Menu Interface ---
+    print("\n--- ADVANCED MATH MENU ---")
+    print("1. Fibonacci  2. Armstrong Check  3. GCD & LCM  4. Perfect Number")
+    choice = input("Select an option: ")
+    num = int(input("Enter primary number: "))
+
+    if choice == '1':
+        print(f"The {num}th Fibonacci number is: {get_fibonacci(num)}")
+    elif choice == '2':
+        print(f"Is {num} an Armstrong number? {is_armstrong(num)}")
+    elif choice == '3':
+        num2 = int(input("Enter second number: "))
+        gcd_val = get_gcd(num, num2)
+        lcm_val = abs(num * num2) // gcd_val
+        print(f"GCD: {gcd_val} | LCM: {lcm_val}")
+    elif choice == '4':
+        print(f"Is {num} a Perfect number? {is_perfect(num)}")
     
 
 # ==========================================

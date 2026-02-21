@@ -12,6 +12,7 @@ SPECIAL INSTRUCTIONS:
   are visually appealing as requested in Q1[cite: 39].
 - Input validation (try-except) is implemented globally to 
   handle edge cases and invalid inputs[cite: 12, 207].
+  To run the assignment, execute main.py. A menu will appear allowing you to select and test each of the 20 questions individually.
 
 CHALLENGES FACED:
 1. Q11 (Pattern 4): Aligning the numbers to form a perfect 

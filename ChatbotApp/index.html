@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CampusPe Chat UI</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <div class="d-flex h-100 vh-100">
+
+        <aside class="sidebar d-flex flex-column bg-dark text-white" id="sidebar">
+            
+            <div class="p-3 border-bottom border-secondary">
+                <button class="btn btn-outline-light w-100 d-flex justify-content-start align-items-center" id="new-chat-btn">
+                    <i class="fas fa-plus me-2"></i> New Chat
+                </button>
+            </div>
+            
+            <div class="chat-history flex-grow-1 overflow-auto p-2">
+                <small class="text-muted fw-bold px-2 mb-2 d-block mt-2">Today</small>
+                
+                <div class="history-item p-2 rounded mb-1 text-truncate" style="cursor: pointer;">
+                    <i class="far fa-message me-2"></i> Brainstorm startup ideas
+                </div>
+                <div class="history-item p-2 rounded mb-1 text-truncate" style="cursor: pointer;">
+                    <i class="far fa-message me-2"></i> Write a script
+                </div>
+                <div class="history-item p-2 rounded mb-1 text-truncate" style="cursor: pointer;">
+                    <i class="far fa-message me-2"></i> Explain a concept
+                </div>
+            </div>
+            
+            <div class="user-profile p-3 border-top border-secondary d-flex align-items-center">
+                <div class="rounded-circle bg-secondary d-flex justify-content-center align-items-center me-2" style="width: 30px; height: 30px;">
+                    <i class="fas fa-user text-white small"></i>
+                </div>
+                <span class="text-truncate" style="font-size: 0.9rem;">My Account</span>
+            </div>
+        </aside>
+
+        <div class="sidebar-overlay d-none" id="sidebar-overlay"></div>
+
+        <main class="flex-grow-1 d-flex flex-column position-relative bg-light">
+            <div class="position-absolute top-0 end-0 p-3 z-3">
+                <button class="btn btn-outline-secondary rounded-circle bg-white shadow-sm" id="theme-toggle" style="width: 40px; height: 40px; transition: all 0.3s ease;">
+                    <i class="fas fa-moon"></i>
+                </button>
+            </div>
+
+            <header class="d-md-none p-3 border-bottom d-flex align-items-center bg-white">
+                <button class="btn btn-light me-2" id="mobile-menu-btn">
+                    <i class="fas fa-bars"></i>
+                </button>
+                <h5 class="m-0">New Chat</h5>
+            </header>
+
+            <section class="welcome-screen d-flex flex-column align-items-center justify-content-center flex-grow-1 p-4" id="welcome-section">
+                <div class="mb-4">
+                    <i class="fas fa-robot fa-4x text-secondary"></i>
+                </div>
+                <h2 class="mb-4 text-center">How can I help you today?</h2>
+
+                <div class="container text-center" style="max-width: 800px;">
+                    <div class="row g-3 justify-content-center">
+                        <div class="col-12 col-md-6">
+                            <div class="card suggestion-card h-100 p-3 text-start shadow-sm" style="cursor: pointer;">
+                                <i class="fas fa-code text-primary mb-2"></i>
+                                <h6 class="card-title m-0">Write a script</h6>
+                                <p class="card-text text-muted small mt-1 mb-0">to automate my daily tasks</p>
+                            </div>
+                        </div>
+                        <div class="col-12 col-md-6">
+                            <div class="card suggestion-card h-100 p-3 text-start shadow-sm" style="cursor: pointer;">
+                                <i class="fas fa-lightbulb text-warning mb-2"></i>
+                                <h6 class="card-title m-0">Brainstorm ideas</h6>
+                                <p class="card-text text-muted small mt-1 mb-0">for a new tech startup</p>
+                            </div>
+                        </div>
+                        <div class="col-12 col-md-6">
+                            <div class="card suggestion-card h-100 p-3 text-start shadow-sm" style="cursor: pointer;">
+                                <i class="fas fa-pen-nib text-success mb-2"></i>
+                                <h6 class="card-title m-0">Draft an email</h6>
+                                <p class="card-text text-muted small mt-1 mb-0">to request a project deadline extension</p>
+                            </div>
+                        </div>
+                        <div class="col-12 col-md-6">
+                            <div class="card suggestion-card h-100 p-3 text-start shadow-sm" style="cursor: pointer;">
+                                <i class="fas fa-book text-danger mb-2"></i>
+                                <h6 class="card-title m-0">Explain a concept</h6>
+                                <p class="card-text text-muted small mt-1 mb-0">like I am 5 years old</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="chat-messages flex-grow-1 overflow-auto p-4 d-none" id="chat-messages">
+                </section>
+
+            <section class="input-area p-3 bg-white border-top">
+                <div class="container" style="max-width: 800px;">
+                    <div class="input-container border rounded-3 p-2 d-flex align-items-end shadow-sm bg-white">
+                        <button class="btn text-muted p-2" id="attach-btn">
+                            <i class="fas fa-paperclip"></i>
+                        </button>
+                        <textarea class="form-control border-0 shadow-none px-2 py-2" id="chat-input" rows="1" placeholder="Send a message..." style="resize: none; max-height: 200px; overflow-y: auto;"></textarea>
+                        <button class="btn btn-primary rounded-circle p-2 ms-2 d-flex align-items-center justify-content-center" id="send-btn" disabled style="width: 40px; height: 40px;">
+                            <i class="fas fa-paper-plane"></i>
+                        </button>
+                    </div>
+                    <div class="text-center mt-2">
+                        <small class="text-muted" style="font-size: 0.75rem;">AI can make mistakes. Consider verifying important information.</small>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="js/chat.js"></script>
+</body>
+</html>

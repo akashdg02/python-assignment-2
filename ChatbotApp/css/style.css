@@ -1,0 +1,148 @@
+/* Part 2.1: CSS Variables and Global Styles */
+:root {
+    /* Color Palette */
+    --bg-main: #f4f4f4;
+    --bg-chat: #ffffff;
+    --sidebar-bg: #202123;
+    --text-primary: #343541;
+    --text-muted: #6e6e80;
+    --accent-color: #10a37f; /* ChatGPT style green */
+    
+    /* Message Bubble Colors */
+    --user-msg-bg: #e7f8f3;
+    --ai-msg-bg: #f7f7f8;
+    
+    /* Spacing & Transitions */
+    --transition-speed: 0.3s ease;
+    --box-shadow: 0 0 15px rgba(0,0,0,0.05);
+}
+
+/* Global Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Inter', sans-serif;
+    color: var(--text-primary);
+    background-color: var(--bg-main);
+    overflow: hidden; /* Prevents whole page scrolling; we only want the chat area to scroll */
+}
+
+/* Input Area Styling */
+.input-container {
+    transition: border-color var(--transition-speed), box-shadow var(--transition-speed);
+}
+
+/* Highlight the box when the user is typing */
+.input-container:focus-within {
+    border-color: var(--accent-color) !important;
+    box-shadow: 0 0 0 2px rgba(16, 163, 127, 0.2) !important;
+}
+
+textarea:focus {
+    outline: none;
+}
+
+/* Suggestion Card Hover Effects */
+.suggestion-card {
+    transition: transform var(--transition-speed), background-color var(--transition-speed);
+}
+
+.suggestion-card:hover {
+    transform: translateY(-3px);
+    background-color: #f8f9fa;
+}
+/* === Part 4: Sidebar & Mobile Responsiveness === */
+
+.sidebar {
+    width: 260px;
+    z-index: 1000;
+    transition: transform var(--transition-speed);
+}
+
+/* Hover effects for chat history */
+.history-item {
+    transition: background-color 0.2s;
+    font-size: 0.9rem;
+}
+
+.history-item:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+}
+
+/* Mobile Adjustments (Screens smaller than 768px) */
+@media (max-width: 768px) {
+    .sidebar {
+        position: absolute;
+        height: 100%;
+        /* Hide off-screen to the left by default on mobile */
+        transform: translateX(-100%); 
+    }
+    
+    /* When the .show class is added via JS, slide it in */
+    .sidebar.show {
+        transform: translateX(0); 
+    }
+    
+    /* Dark background overlay behind the sidebar on mobile */
+    .sidebar-overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100vw;
+        height: 100vh;
+        background-color: rgba(0, 0, 0, 0.5);
+        z-index: 999;
+    }
+    
+    .sidebar-overlay.show {
+        display: block !important;
+    }
+    
+    /* Adjust message padding for smaller screens */
+    .chat-messages {
+        padding: 1rem !important;
+    }
+}
+/* === Bonus: Dark Mode Theme === */
+body[data-theme="dark"] {
+    --bg-main: #343541;
+    --bg-chat: #343541;
+    --text-primary: #d1d5db;
+    --user-msg-bg: #444654;
+    --ai-msg-bg: #343541;
+}
+
+/* Force specific bootstrap classes to adopt dark mode */
+body[data-theme="dark"] .bg-white,
+body[data-theme="dark"] .bg-light {
+    background-color: var(--bg-main) !important;
+    color: var(--text-primary) !important;
+}
+
+body[data-theme="dark"] .input-area {
+    background-color: var(--bg-main) !important;
+    border-color: #565869 !important;
+}
+
+body[data-theme="dark"] .input-container {
+    background-color: #40414f !important;
+    border-color: #565869 !important;
+}
+
+body[data-theme="dark"] textarea {
+    background-color: #40414f !important;
+    color: var(--text-primary) !important;
+}
+
+body[data-theme="dark"] .suggestion-card {
+    background-color: #40414f;
+    border-color: #565869;
+}
+
+body[data-theme="dark"] .suggestion-card:hover {
+    background-color: #2a2b32;
+}
